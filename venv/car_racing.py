@@ -1,7 +1,7 @@
 import pygame as pg
 from car import Car
 from car_opponent import Car_opponent
-from lines import Line
+# from lines import Line
 
 
 class Game:
@@ -10,7 +10,7 @@ class Game:
         self.screen = pg.display.set_mode((0, 0), pg.FULLSCREEN)
         self.running = True
         self.car = Car(self)
-        self.road = Line(self)
+        # self.road = Line(self)
         self.car_opponent = Car_opponent(self)
         while self.running:
             for event in pg.event.get():
@@ -29,15 +29,16 @@ class Game:
                         self.car.move_right = False
                     if event.key == pg.K_a:
                         self.car.move_left = False
-                # pg.sprite.groupcollide(self.car, Car_opponent)
+                if pg.sprite.collide_mask(self.car, self.car_opponent):
+                    self.running = False
 
             # обновление экрана
             self.screen.fill((100, 100, 100))
-            self.road.draw()
+            # self.road.draw()
+            # self.road.update()
             self.car.update()
             self.car.draw()
             self.car_opponent.update()
             self.car_opponent.draw()
-            self.road.update()
             pg.display.flip()
 game = Game()

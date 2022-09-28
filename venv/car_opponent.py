@@ -2,7 +2,7 @@ import pygame as pg
 from random import randint
 from pygame.sprite import Sprite
 from random import choice
-class Car_opponent:
+class Car_opponent(Sprite):
     def __init__(self, game):
         super().__init__()
         self.screen = game.screen
@@ -15,13 +15,14 @@ class Car_opponent:
         self.image3 = pg.transform.scale(self.image3, (self.image3.get_width() // 3.5, self.image2.get_height() // 1))
         self.images = [self.image1, self.image2, self.image3]
         self.image = choice(self.images)
+        # self.road_speed = game.road.speed
 
 
 
 
 
         self.rect = self.image.get_rect()
-        self.speed = randint(10, 30) / 10 + game.road.speed
+        self.speed = randint(10, 30)
         self.y = float(self.rect.y)
         self.rect.x = randint(0, self.screen_rect.width - self.rect.width)
     def draw(self):

@@ -9,16 +9,17 @@ class Line:
         self.image = pg.image.load('imgs/fon_doroga.png')
         self.image = pg.transform.scale(self.image, (self.screen_rect.width, self.image.get_height()))
         self.rect = self.image.get_rect()
-        self.speed = 1
-        self.y = float(self.rect.y)
+        self.rect.y = -self.rect.height + self.screen_rect.height
+        self.speed = 4
 
     def draw(self):
         self.screen.blit(self.image, self.rect)
 
     def update(self):
-        self.y += self.speed
-        self.rect.y = self.y
-        # if self.rect.top > self.screen_rect.bottom:
+        self.rect.y += self.speed
+        if self.rect.y == 60:
+            self.rect.y=0
+        # if self.rect.top > selfq.screen_rect.bottom:
         #     self.rect.bottom = self.screen_rect.top
         #     self.y = float(self.rect.y)
         #     self.speed = randint(10, 30) / 10

@@ -1,7 +1,7 @@
 import pygame as pg
 from pygame.sprite import Sprite
 
-class Car:
+class Car(Sprite):
     def __init__(self, game):
         super().__init__()
         self.screen = game.screen
