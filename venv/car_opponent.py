@@ -13,9 +13,11 @@ class Car_opponent(Sprite):
     def reposition(self):
         cars = ['car_opponent.png', 'car_opponent2.png', 'car_opponent3.png']
         self.image = pg.image.load(f'imgs/{choice(cars)}')
-        self.image = pg.transform.scale(self.image, (100, 200))
+        self.width = 100
+        self.height = 200
+        self.image = pg.transform.scale(self.image, (self.width, self.height))
         self.rect = self.image.get_rect()
-        self.rect.x = randint(0, self.screen_rect.width - self.rect.width)
+        self.rect.x = randint(0, self.screen_rect.width // self.width) * self.width
         self.rect.bottom = self.screen_rect.top
         self.y = float(self.rect.y)
         self.speed = randint(10, 30) / 10

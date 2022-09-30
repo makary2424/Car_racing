@@ -17,10 +17,11 @@ class Game:
         self.background = pg.mixer.Sound("imgs/background.mp3")
         self.background.set_volume(0.3)
         self.background.play()
+        self.cars_count = 6
 
     def _cars_update(self):
         self.cars.update()
-        if len(self.cars) < 3:
+        if len(self.cars) < self.cars_count:
             self.cars.add(Car_opponent(game))
         for car in self.cars:
             if car.rect.top > self.screen.get_height():
