@@ -11,12 +11,21 @@ class Game:
         self.running = True
         self.car = Car(self)
         # self.road = Line(self)
-        self.car_opponent = Car_opponent(self)
+        self.cars = pg.sprite.Group()
         self.boom = pg.mixer.Sound("imgs/crash.mp3")
         self.boom.set_volume(0.3)
         self.background = pg.mixer.Sound("imgs/background.mp3")
         self.background.set_volume(0.3)
         self.background.play()
+
+    def _cars_update(self):
+        self.cars.update()
+        if len(self.cars) < 3:
+            self.cars.add(Car_opponent(game))
+        for car in self.cars:
+            if car.rect.top > self.screen.get_height():
+                self.cars.remove(car)
+    def run_game(self):
         while self.running:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
@@ -36,7 +45,7 @@ class Game:
                         self.car.move_right = False
                     if event.key == pg.K_a:
                         self.car.move_left = False
-                if pg.sprite.collide_mask(self.car, self.car_opponent):
+                if pg.sprite.spritecollideany(self.car, self.cars):
                     self.boom.play()
 
 
@@ -46,7 +55,8 @@ class Game:
             # self.road.update()
             self.car.update()
             self.car.draw()
-            self.car_opponent.update()
-            self.car_opponent.draw()
+            self._cars_update()
+            self.cars.draw(self.screen)
             pg.display.flip()
 game = Game()
+game.run_game()
