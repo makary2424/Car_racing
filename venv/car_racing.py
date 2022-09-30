@@ -1,8 +1,8 @@
 import pygame as pg
 from car import Car
 from car_opponent import Car_opponent
+from  time import sleep
 # from lines import Line
-
 
 class Game:
     def __init__(self):
@@ -12,6 +12,10 @@ class Game:
         self.car = Car(self)
         # self.road = Line(self)
         self.car_opponent = Car_opponent(self)
+        self.boom = pg.mixer.Sound("imgs/crash.mp3")
+        self.background = pg.mixer.Sound("imgs/background.mp3")
+        self.background.set_volume(0.7)
+        self.background.play()
         while self.running:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
@@ -30,9 +34,11 @@ class Game:
                     if event.key == pg.K_a:
                         self.car.move_left = False
                 if pg.sprite.collide_mask(self.car, self.car_opponent):
+                    self.boom.play()
+                    sleep(0.9)
                     self.running = False
 
-            # обновление экрана
+            # обновлениеd
             self.screen.fill((100, 100, 100))
             # self.road.draw()
             # self.road.update()
