@@ -14,15 +14,20 @@ class Car(Sprite):
         self.speed = 1
         self.move_right = False
         self.move_left = False
+        self.turbo = False
         # pg.transform.scale(pg.image.load('imgs/pngegg.png'), (90, 80))
 
     def update(self):
+        if self.turbo:
+            speed = self.speed * 2
+        else:
+            speed = self.speed
         if self.move_right:
             if self.x < self.screen_rect.width - self.rect.width:
-                self.x += self.speed
+                self.x += speed
         if self.move_left:
             if self.x > 0:
-                self.x -= self.speed
+                self.x -= speed
         self.rect.x = int(self.x)
 
 

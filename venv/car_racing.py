@@ -13,8 +13,9 @@ class Game:
         # self.road = Line(self)
         self.car_opponent = Car_opponent(self)
         self.boom = pg.mixer.Sound("imgs/crash.mp3")
+        self.boom.set_volume(0.3)
         self.background = pg.mixer.Sound("imgs/background.mp3")
-        self.background.set_volume(0.7)
+        self.background.set_volume(0.3)
         self.background.play()
         while self.running:
             for event in pg.event.get():
@@ -27,6 +28,8 @@ class Game:
                         self.car.move_right = True
                     if event.key == pg.K_a:
                         self.car.move_left = True
+                    if event.key == pg.K_SPACE:
+                        self.car.turbo = not self.car.turbo
 
                 if event.type == pg.KEYUP:
                     if event.key == pg.K_d:
@@ -35,8 +38,7 @@ class Game:
                         self.car.move_left = False
                 if pg.sprite.collide_mask(self.car, self.car_opponent):
                     self.boom.play()
-                    sleep(0.9)
-                    self.running = False
+
 
             # обновлениеd
             self.screen.fill((100, 100, 100))
