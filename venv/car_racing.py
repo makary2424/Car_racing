@@ -22,14 +22,22 @@ class Game:
         self.car_width = 100
         self.lines_count = self.screen.get_width() // self.car_width
         self.health = 3
+        self.count_cars = 0
+        self.speed_up = 1
+
 
     def _cars_update(self):
         self.cars.update()
         vacant = [line for line in range(self.lines_count)]
         for car in self.cars:
             vacant.remove(car.line_number)
-            if car.rect.top > self.screen.get_height():
+            if car.rect.y > self.screen.get_height():
+                self.count_cars += 1
+                print(self.count_cars)
                 self.cars.remove(car)
+
+
+
         if len(self.cars) < self.cars_count:
             self.cars.add(Car_opponent(game, choice(vacant)))
 

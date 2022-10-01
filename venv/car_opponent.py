@@ -21,7 +21,7 @@ class Car_opponent(Sprite):
         self.rect.x = self.line_number * self.width
         self.rect.bottom = self.screen_rect.top
         self.y = float(self.rect.y)
-        self.speed = randint(10, 30) / 10
+        self.speed = (randint(10, 30) / 10) * self.game.speed_up
 
 
     def update(self):
