@@ -11,7 +11,7 @@ class Car(Sprite):
         self.rect = self.image.get_rect()
         self.rect.midbottom = self.screen_rect.midbottom
         self.x = float(self.rect.x)
-        self.speed = 1
+        self.speed = 2
         self.move_right = False
         self.move_left = False
         self.turbo = False
